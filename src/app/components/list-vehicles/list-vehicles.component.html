@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table align-items-center table-flush">
+    <thead class="thead-light">
+      <tr>
+        <th *ngFor="let field of fields" scope="col">{{field.label}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of listEntries">
+        <td *ngFor="let field of fields">
+          <ng-container *ngIf="field.key === 'acciones'; else elseTemplate">
+            <button class="btn btn-success btn-sm" (click)="dispatchVehicle(entry.licencePlate)" title="Registrar salida"><i class="ni ni-check-bold"></i></button>
+          </ng-container>
+          <ng-template #elseTemplate>
+            {{entry[field.key]}}
+          </ng-template>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
