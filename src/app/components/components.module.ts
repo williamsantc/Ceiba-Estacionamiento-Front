@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListVehiclesComponent } from './list-vehicles/list-vehicles.component';
 import { ModalEntryContentComponent } from './modal-entry-content/modal-entry-content.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ModalConfirmDispatch } from './modal-confirm-dispatch/modal-confirm-dispatch.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     NavbarComponent,
     SidebarComponent,
     ListVehiclesComponent,
-    ModalEntryContentComponent
+    ModalEntryContentComponent,
+    ModalConfirmDispatch
   ],
   exports: [
     FooterComponent,
@@ -30,6 +32,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     SidebarComponent,
     ListVehiclesComponent,
   ],
-  entryComponents: [ModalEntryContentComponent]
+  entryComponents: [ModalEntryContentComponent, ModalConfirmDispatch]
 })
 export class ComponentsModule { }
