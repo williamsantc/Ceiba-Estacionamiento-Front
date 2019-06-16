@@ -8,6 +8,7 @@ import { ModalEntryContentComponent } from 'src/app/components/modal-entry-conte
 import { FormGroup } from '@angular/forms';
 import { ResponseEntry } from 'src/app/models/Response';
 import { ModalConfirmDispatch } from 'src/app/components/modal-confirm-dispatch/modal-confirm-dispatch.component';
+import { ModalSuccessComponent } from 'src/app/components/modal-success/modal-success.component';
 
 const VEHICLE_TYPES: VehicleType[] = [
   { value: 'CAR', text: 'Carro' },
@@ -85,7 +86,6 @@ export class ParkingComponent implements OnInit {
   }
 
   async dispatchEntry(licencePlate: string) {
-    console.log(licencePlate)
     const modalRef = this.modalService.open(ModalConfirmDispatch, { ariaLabelledBy: 'modal-basic-title' })
     modalRef.componentInstance.licencePlate = licencePlate;
 
@@ -102,7 +102,9 @@ export class ParkingComponent implements OnInit {
 
     const exec = await this._parkingService.dispatchEntry(new Entry(licencePlate, null, null))
     exec.subscribe((resp: ResponseEntry) => {
-      console.log(resp)
+      const modalSuccessRef = this.modalService.open(ModalSuccessComponent, { ariaLabelledBy: 'modal-basic-title' })
+      modalSuccessRef.componentInstance.bill = resp.value
+      this.getEntries()
     }, err => {
       this.toast.error(err.error.message, "Error")
     })

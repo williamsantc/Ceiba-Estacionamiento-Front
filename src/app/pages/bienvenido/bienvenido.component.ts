@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ParkingService } from 'src/app/services/parking.service';
 
 @Component({
   selector: 'app-bienvenido',

@@ -9,6 +9,7 @@ import { ListVehiclesComponent } from './list-vehicles/list-vehicles.component';
 import { ModalEntryContentComponent } from './modal-entry-content/modal-entry-content.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ModalConfirmDispatch } from './modal-confirm-dispatch/modal-confirm-dispatch.component';
+import { ModalSuccessComponent } from './modal-success/modal-success.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { ModalConfirmDispatch } from './modal-confirm-dispatch/modal-confirm-dis
     SidebarComponent,
     ListVehiclesComponent,
     ModalEntryContentComponent,
-    ModalConfirmDispatch
+    ModalConfirmDispatch,
+    ModalSuccessComponent
   ],
   exports: [
     FooterComponent,
@@ -32,6 +34,6 @@ import { ModalConfirmDispatch } from './modal-confirm-dispatch/modal-confirm-dis
     SidebarComponent,
     ListVehiclesComponent,
   ],
-  entryComponents: [ModalEntryContentComponent, ModalConfirmDispatch]
+  entryComponents: [ModalEntryContentComponent, ModalConfirmDispatch, ModalSuccessComponent]
 })
 export class ComponentsModule { }
