@@ -2,14 +2,9 @@ import { browser, element, by, ExpectedConditions, ProtractorExpectedConditions,
 
 export class ParkingPage {
   until: ProtractorExpectedConditions;
-  vehicleTypes: any;
 
   constructor() {
     this.until = ExpectedConditions;
-    this.vehicleTypes = {
-      CAR: 0,
-      MOTORCYCLE: 1
-    }
   }
 
   // Tasks
@@ -71,6 +66,7 @@ export class ParkingPage {
 
     // Tick to wait until options apear
     await browser.sleep(500);
+    // End tick
     const options: ElementFinder[] = await this.getVehicleTypeField().all(by.tagName('option'));
     options[optIndex].click();
   }
