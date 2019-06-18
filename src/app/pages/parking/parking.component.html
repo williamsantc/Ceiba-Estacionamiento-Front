@@ -9,7 +9,7 @@
           <h3 class="mb-0">
             Vehiculos en el parqueadero
           </h3>
-          <button type="button" class="btn btn-primary btn-icon" (click)="openModal()" title="Nuevo Ingreso"><i
+          <button type="button" class="btn btn-primary btn-icon" id="btnEntry" (click)="openModal()" title="Nuevo Ingreso"><i
               class="ni ni-fat-add"></i></button>
         </div>
         <app-list-vehicles [listEntries]="listEntries" (dispatchEntry)="dispatchEntry($event)"></app-list-vehicles>

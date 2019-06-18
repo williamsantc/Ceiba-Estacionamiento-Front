@@ -33,7 +33,9 @@ export class ParkingComponent implements OnInit {
   payload: Entry;
   listEntries: Entry[];
 
-  constructor(private modalService: NgbModal, private toast: ToastrService, private _parkingService: ParkingService) {
+  constructor(private modalService: NgbModal, 
+    private toast: ToastrService, 
+    private _parkingService: ParkingService ) {
     this.payload = {
       engineDisplacement: '',
       licencePlate: '',
@@ -63,7 +65,6 @@ export class ParkingComponent implements OnInit {
     const vehicleType = response.get('vehicleType').value;
 
     const entry: Entry = new Entry(licencePlate, vehicleType, engineDisplacement);
-    console.log(entry)
     const exec = await this._parkingService.saveEntry(entry)
     exec.subscribe(() => {
       this.toast.success("Ingreso registrado correctamente", "Éxito")
@@ -72,10 +73,6 @@ export class ParkingComponent implements OnInit {
       this.toast.error(err.error.message, "Error")
     })
 
-  }
-
-  async ngOnInit() {
-    await this.getEntries()
   }
 
   async getEntries() {
@@ -110,6 +107,10 @@ export class ParkingComponent implements OnInit {
     })
   }
 
+  async ngOnInit() {
+    await this.getEntries()
+  }
 
+  
 
 }

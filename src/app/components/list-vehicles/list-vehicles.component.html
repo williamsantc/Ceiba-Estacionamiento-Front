@@ -1,29 +1,65 @@
-<div class="table-responsive">
-  <table *ngIf="listEntries && listEntries.length > 0; else emptylist" class="table align-items-center table-flush">
-    <thead class="thead-light">
-      <tr>
-        <th *ngFor="let field of fields" scope="col">{{field.label}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let entry of listEntries">
-        <td *ngFor="let field of fields">
-          <ng-container *ngIf="field.key === 'acciones'; else elseTemplate">
-            <button class="btn btn-success btn-sm" (click)="dispatchVehicle(entry.licencePlate)"
-              title="Registrar salida"><i class="ni ni-check-bold"></i></button>
-          </ng-container>
-          <ng-template #elseTemplate>
-            {{entry[field.key]}}
-          </ng-template>
+<div *ngIf="listEntries && listEntries.length > 0; else emptylist">
 
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <ng-template #emptylist>
-    <div class="alert alert-default m-2 shadow" role="alert">
-      No hay vehículos actualmente en el parqueadero.
-    </div>
-  </ng-template>
+  <div class="table-responsive">
+    <!-- desktop table -->
+    <table *ngIf="breakPoint.gte('lg'); else mobiletable" class="table table-striped align-items-center table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th *ngFor="let field of fields" scope="col">{{field.label}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of listEntries">
+          <td *ngFor="let field of fields">
+            <ng-container *ngIf="field.key === 'acciones'; else elseTemplate">
+              <button class="btn btn-success btn-sm" (click)="dispatchVehicle(entry.licencePlate)"
+                title="Registrar salida"><i class="ni ni-check-bold"></i></button>
+            </ng-container>
+            <ng-template #elseTemplate>
+              {{entry[field.key]}}
+            </ng-template>
 
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- mobile table -->
+    <ng-template #mobiletable>
+      <table class="table align-items-center table-striped table-flush b-table-stacked">
+        <tbody role="rowgroup" class="">
+          <!---->
+          <tr role="row" *ngFor="let entry of listEntries">
+            <td *ngFor="let field of fields; let i = index" [attr.data-label]="field.label" [attr.aria-colindex]="i">
+              <ng-container *ngIf="field.key === 'acciones'; else elseTemplate">
+                <div><button class="btn btn-success btn-sm" (click)="dispatchVehicle(entry.licencePlate)"
+                    title="Registrar salida"><i class="ni ni-check-bold"></i></button></div>
+              </ng-container>
+              <ng-template #elseTemplate>
+                <div>{{entry[field.key]}}</div>
+              </ng-template>
+            </td>
+          </tr>
+          <!-- <tr role="row" class="">
+            <td role="cell" aria-colindex="1" data-label="Age" class="">
+              <div>40</div>
+            </td>
+            <td role="cell" aria-colindex="2" data-label="First Name" class="">
+              <div>Dickerson</div>
+            </td>
+            <td role="cell" aria-colindex="3" data-label="Last Name" class="">
+              <div>Macdonald</div>
+            </td>
+          </tr> -->
+          <!---->
+          <!---->
+        </tbody>
+      </table>
+    </ng-template>
+
+  </div>
 </div>
+<ng-template #emptylist>
+  <div class="alert alert-default m-2 shadow" role="alert">
+    No hay vehículos actualmente en el parqueadero.
+  </div>
+</ng-template>

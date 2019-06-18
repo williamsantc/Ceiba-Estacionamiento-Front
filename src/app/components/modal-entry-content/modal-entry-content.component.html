@@ -20,7 +20,7 @@
       </select>
     </div>
     <div class="form-group" *ngIf="vehicleType.value === 'MOTORCYCLE'">
-      <label for="licencePlate" class="font-weight-bold">Cilindraje:</label>
+      <label for="engineDisplacement" class="font-weight-bold">Cilindraje:</label>
       <input id="engineDisplacement" #engineDisplacement formControlName="engineDisplacement"
         class="form-control form-control-alternative" placeholder="Placa del vehiculo">
     </div>
@@ -32,5 +32,5 @@
   </div>
 </div>
 <div class="modal-footer bg-light-gray rounded">
-  <button type="button" class="btn btn-primary" (click)="emmitValue()">Guardar</button>
+  <button type="button" id="btnSave" class="btn btn-primary" (click)="emmitValue()">Guardar</button>
 </div>
