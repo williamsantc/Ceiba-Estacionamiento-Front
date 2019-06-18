@@ -12,7 +12,6 @@ import { AppComponent } from './app.component'
 import { ComponentsModule } from './components/components.module';
 import { RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 import { environment } from './../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,8 +20,7 @@ import { httpInterceptorProviders } from './interceptors/index.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
-    AuthLayoutComponent
+    AdminLayoutComponent
   ],
   imports: [
     RouterModule,

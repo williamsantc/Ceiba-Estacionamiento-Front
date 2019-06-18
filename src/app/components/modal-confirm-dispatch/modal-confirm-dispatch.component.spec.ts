@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalConfirmDispatch } from './modal-confirm-dispatch.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 describe('ModalConfirmDispatch', () => {
   let component: ModalConfirmDispatch;
@@ -8,9 +9,10 @@ describe('ModalConfirmDispatch', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalConfirmDispatch ]
+      declarations: [ModalConfirmDispatch],
+      providers: [NgbActiveModal]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

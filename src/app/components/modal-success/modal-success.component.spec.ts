@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ModalSuccessComponent } from './modal-success.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 describe('ModalSuccessComponent', () => {
   let component: ModalSuccessComponent;
@@ -8,9 +9,10 @@ describe('ModalSuccessComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalSuccessComponent ]
+      declarations: [ModalSuccessComponent],
+      providers: [NgbActiveModal]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,5 +23,17 @@ describe('ModalSuccessComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('Money Masked Method', () => {
+    component.bill = '1000'
+    expect(component.billMasked).toEqual('COP 1,000.00')
+  });
+
+  it('Money Masked on UI', () => {
+    component.bill = '1000'
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('COP 1,000.00');
   });
 });

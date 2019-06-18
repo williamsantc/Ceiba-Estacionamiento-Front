@@ -23,7 +23,7 @@ export class ModalEntryContentComponent implements OnInit {
 
   @ViewChild("licencePlate", { static: false }) licencePlateField: ElementRef<HTMLInputElement>;
   @ViewChild("vehicleType", { static: false }) vehicleTypeField: ElementRef<HTMLSelectElement>;
-  @ViewChild("engineDisplacement", { static: false}) engineDisplacementField: ElementRef<HTMLInputElement>;
+  @ViewChild("engineDisplacement", { static: false }) engineDisplacementField: ElementRef<HTMLInputElement>;
 
   constructor(public activeModal: NgbActiveModal, private toast: ToastrService) {
     this.vehicleTypes = VEHICLE_TYPES;
@@ -36,9 +36,9 @@ export class ModalEntryContentComponent implements OnInit {
 
   buildForm() {
     this.entryForm = new FormGroup({
-      'licencePlate': new FormControl(this.payload.licencePlate, Validators.required),
-      'vehicleType': new FormControl(this.payload.vehicleType, Validators.required),
-      'engineDisplacement': new FormControl(this.payload.engineDisplacement, Validators.required)
+      licencePlate: new FormControl(this.payload.licencePlate, Validators.required),
+      vehicleType: new FormControl(this.payload.vehicleType, Validators.required),
+      engineDisplacement: new FormControl(this.payload.engineDisplacement, Validators.required)
     });
   }
 
@@ -63,30 +63,38 @@ export class ModalEntryContentComponent implements OnInit {
     })
   }
 
-  saveChanges(){
+  saveChanges(): boolean {
     const engineDisplacement = this.entryForm.get('engineDisplacement');
     const vehicleType = this.entryForm.get('vehicleType');
     const licencePlate = this.entryForm.get("licencePlate");
 
-    if(licencePlate.errors && licencePlate.errors.required) {
+    if (licencePlate.errors && licencePlate.errors.required) {
       this.toast.error('El campo placa es requerido.', 'Campos incompletos')
       this.licencePlateField.nativeElement.focus()
-      return
+      return false;
     }
 
-    if(vehicleType.errors && vehicleType.errors.required) {
+    if (vehicleType.errors && vehicleType.errors.required) {
       this.toast.error('El campo tipo vehiculo es requerido.', 'Campos incompletos')
       this.vehicleTypeField.nativeElement.focus()
-      return
+      return false;
     }
 
-    if(engineDisplacement.errors && engineDisplacement.errors.required) {
+    if (engineDisplacement.errors && engineDisplacement.errors.required) {
       this.toast.error('El campo cilindraje es requerido.', 'Campos incompletos')
       this.engineDisplacementField.nativeElement.focus()
-      return
+      return false;
     }
 
-    this.activeModal.close(this.entryForm);
+    return true;
+
+
+  }
+
+  emmitValue() {
+    if (this.saveChanges()) {
+      this.activeModal.close(this.entryForm);
+    }
   }
 
 }
