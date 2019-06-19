@@ -42,6 +42,18 @@ export class ParkingPage {
     return $('#btnSave');
   }
 
+  getBtnDispatchButton(licencePlate: string): ElementFinder {
+    return $('#btnDispatch' + licencePlate);
+  }
+
+  getConfirmDispatchButton(): ElementFinder {
+    return $('#btnConfirmDispatch');
+  }
+
+  getPaymentValue(): ElementFinder {
+    return $('#paymentValue');
+  }
+
   getToastMessage(): ElementFinder {
     return element(by.className("toast-message"));
   }
@@ -54,6 +66,10 @@ export class ParkingPage {
 
   async getToastMessageText(): Promise<string> {
     return await this.getToastMessage().getText();
+  }
+
+  async getPaymentValueText(): Promise<string> {
+    return await this.getPaymentValue().getText();
   }
 
   // Set DOM values
@@ -85,30 +101,71 @@ export class ParkingPage {
     await this.getBtnSaveButton().click();
   }
 
-  // waitUntil Methods
+  async clickDispatchButton(licencePlate: string): Promise<void> {
+    await this.getBtnDispatchButton(licencePlate).click();
+  }
+
+  async clickToastMessage(): Promise<void> {
+    await this.getToastMessage().click();
+  }
+
+  async clickConfirmDispatchButton(): Promise<void> {
+    await this.getConfirmDispatchButton().click();
+  }
+
+  // waitUntil PRESENT Methods
 
   async waitUntilEntryButtonIsPresent(): Promise<any> {
-    return await this.waitUntil(this.getEntryButton());
+    return await this.waitUntilIsPresent(this.getEntryButton());
   }
 
   async waitUntilModalEntryTitleIsPresent(): Promise<any> {
-    return await this.waitUntil(this.getModalEntryTitle());
+    return await this.waitUntilIsPresent(this.getModalEntryTitle());
   }
 
   async waitUntilLicencePlateFieldIsPresent(): Promise<void> {
-    return await this.waitUntil(this.getLicencePLateField());
+    return await this.waitUntilIsPresent(this.getLicencePLateField());
   }
 
-  async waitUnilToastMessageExist(): Promise<void> {
-    return await this.waitUntil(this.getToastMessage());
+  async waitUnilToastMessageIsPresent(): Promise<void> {
+    return await this.waitUntilIsPresent(this.getToastMessage());
   }
 
-  async waitUntil(element: ElementFinder): Promise<void> {
+  async waitUntildispatchButtonIsPresent(licencePlate: string): Promise<void> {
+    return await this.waitUntilIsPresent(this.getBtnDispatchButton(licencePlate));
+  }
+
+  async waitUntilConfirmDispatchButtonIsPresent(): Promise<any> {
+    return await this.waitUntilIsPresent(this.getConfirmDispatchButton());
+  }
+
+  async waitUntilPaymentValueIsPresent(): Promise<void> {
+    return await this.waitUntilIsPresent(this.getPaymentValue());
+  }
+
+  async waitUntilIsPresent(element: ElementFinder): Promise<void> {
     const id = await element.getId()
     return await browser.wait(
       this.until.presenceOf(element),
       5000,
       `Element ${id} taking too long to appear in the DOM`
     );
+
+  }
+
+  // waitUntil NOT PRESENT Methods
+
+  async waitUnilToastMessageIsNotPresent(): Promise<void> {
+    return await this.waitUntilIsNotPresent(this.getToastMessage());
+  }
+
+  async waitUntilIsNotPresent(element: ElementFinder): Promise<void> {
+    const id = await element.getId()
+    return await browser.wait(
+      this.until.stalenessOf(element),
+      5000,
+      `Element ${id} taking too long to disappear in the DOM`
+    );
+
   }
 }

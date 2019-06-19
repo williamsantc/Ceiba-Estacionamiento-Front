@@ -12,7 +12,7 @@
         <tr *ngFor="let entry of listEntries">
           <td *ngFor="let field of fields">
             <ng-container *ngIf="field.key === 'acciones'; else elseTemplate">
-              <button class="btn btn-success btn-sm" (click)="dispatchVehicle(entry.licencePlate)"
+              <button [id]="entry.licencePlate" class="btn btn-success btn-sm" (click)="dispatchVehicle(entry.licencePlate)"
                 title="Registrar salida"><i class="ni ni-check-bold"></i></button>
             </ng-container>
             <ng-template #elseTemplate>
@@ -31,7 +31,7 @@
           <tr role="row" *ngFor="let entry of listEntries">
             <td *ngFor="let field of fields; let i = index" [attr.data-label]="field.label" [attr.aria-colindex]="i">
               <ng-container *ngIf="field.key === 'acciones'; else elseTemplate">
-                <div><button class="btn btn-success btn-sm" (click)="dispatchVehicle(entry.licencePlate)"
+                <div><button [id]="'btnDispatch'+entry.licencePlate" class="btn btn-success btn-sm" (click)="dispatchVehicle(entry.licencePlate)"
                     title="Registrar salida"><i class="ni ni-check-bold"></i></button></div>
               </ng-container>
               <ng-template #elseTemplate>
@@ -39,19 +39,6 @@
               </ng-template>
             </td>
           </tr>
-          <!-- <tr role="row" class="">
-            <td role="cell" aria-colindex="1" data-label="Age" class="">
-              <div>40</div>
-            </td>
-            <td role="cell" aria-colindex="2" data-label="First Name" class="">
-              <div>Dickerson</div>
-            </td>
-            <td role="cell" aria-colindex="3" data-label="Last Name" class="">
-              <div>Macdonald</div>
-            </td>
-          </tr> -->
-          <!---->
-          <!---->
         </tbody>
       </table>
     </ng-template>
