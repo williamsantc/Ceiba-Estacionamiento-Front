@@ -44,44 +44,27 @@ export class BreakPointComponent implements OnInit {
   onResize() {
     const clientWidth = window.innerWidth
     this.size = clientWidth
-    for (let bp of this.breakPoints) {
-      if (clientWidth <= bp.value) {
-        this.value = bp.alias
-        break
-      }
-    }
+    this.value = this.breakPoints.find(bp => clientWidth <= bp.value)
   }
 
   gte(reqBp: string): boolean {
     let reqBpObj = this.breakPoints.find(bp => bp.alias === reqBp)
-    if (this.size >= reqBpObj.value) {
-      return true
-    }
-    return false
+    return this.size >= reqBpObj.value
   }
 
   gt(reqBp: string): boolean {
     let reqBpObj = this.breakPoints.find(bp => bp.alias === reqBp)
-    if (this.size > reqBpObj.value) {
-      return true
-    }
-    return false
+    return this.size > reqBpObj.value
   }
 
   lt(reqBp: string): boolean {
     let reqBpObj = this.breakPoints.find(bp => bp.alias === reqBp)
-    if (this.size < reqBpObj.value) {
-      return true
-    }
-    return false
+    return this.size < reqBpObj.value
   }
 
   lte(reqBp: string): boolean {
     let reqBpObj = this.breakPoints.find(bp => bp.alias === reqBp)
-    if (this.size <= reqBpObj.value) {
-      return true
-    }
-    return false
+    return this.size <= reqBpObj.value
   }
 
 }
